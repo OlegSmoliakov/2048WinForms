@@ -1,6 +1,6 @@
 ﻿namespace _2048WinFormsApp
 {
-    partial class StartSettingsForm
+    partial class StartForm
     {
         /// <summary>
         /// Required designer variable.
@@ -40,29 +40,31 @@
             // 
             // userNameTextBox
             // 
-            userNameTextBox.Location = new Point(21, 52);
+            userNameTextBox.Location = new Point(24, 69);
+            userNameTextBox.Margin = new Padding(3, 4, 3, 4);
             userNameTextBox.Name = "userNameTextBox";
-            userNameTextBox.Size = new Size(237, 23);
+            userNameTextBox.Size = new Size(270, 27);
             userNameTextBox.TabIndex = 0;
             userNameTextBox.Validating += userNameTextBox_Validating;
             // 
             // label1
             // 
             label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(24, 15);
+            label1.Location = new Point(27, 20);
             label1.Name = "label1";
-            label1.Size = new Size(234, 25);
+            label1.Size = new Size(267, 33);
             label1.TabIndex = 1;
-            label1.Text = "Введите ваше имя";
+            label1.Text = "Enter your nickname";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // userNameButton
             // 
-            userNameButton.Location = new Point(21, 213);
+            userNameButton.Location = new Point(24, 284);
+            userNameButton.Margin = new Padding(3, 4, 3, 4);
             userNameButton.Name = "userNameButton";
-            userNameButton.Size = new Size(235, 36);
+            userNameButton.Size = new Size(269, 48);
             userNameButton.TabIndex = 2;
-            userNameButton.Text = "Начать игру!";
+            userNameButton.Text = "Start the game!";
             userNameButton.UseVisualStyleBackColor = true;
             userNameButton.Click += userNameButton_Click;
             // 
@@ -70,9 +72,10 @@
             // 
             mapSizeComboBox.FormattingEnabled = true;
             mapSizeComboBox.Items.AddRange(new object[] { "4x4", "5x5", "6x6" });
-            mapSizeComboBox.Location = new Point(24, 157);
+            mapSizeComboBox.Location = new Point(27, 209);
+            mapSizeComboBox.Margin = new Padding(3, 4, 3, 4);
             mapSizeComboBox.Name = "mapSizeComboBox";
-            mapSizeComboBox.Size = new Size(232, 23);
+            mapSizeComboBox.Size = new Size(265, 28);
             mapSizeComboBox.TabIndex = 3;
             mapSizeComboBox.Text = "4x4";
             // 
@@ -80,11 +83,11 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(27, 118);
+            label2.Location = new Point(31, 157);
             label2.Name = "label2";
-            label2.Size = new Size(228, 25);
+            label2.Size = new Size(205, 32);
             label2.TabIndex = 4;
-            label2.Text = "Выберите размер поля";
+            label2.Text = "Choose field size";
             // 
             // errorProvider
             // 
@@ -93,14 +96,15 @@
             // StartSettingsForm
             // 
             AcceptButton = userNameButton;
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(274, 271);
+            ClientSize = new Size(313, 361);
             Controls.Add(label2);
             Controls.Add(mapSizeComboBox);
             Controls.Add(userNameButton);
             Controls.Add(label1);
             Controls.Add(userNameTextBox);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "StartSettingsForm";
             Text = "2048";
             Load += UserNameForm_Load;

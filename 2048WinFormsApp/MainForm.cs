@@ -1,3 +1,5 @@
+using TaskManager;
+
 namespace _2048WinFormsApp
 {
     public partial class MainForm : Form
@@ -6,9 +8,8 @@ namespace _2048WinFormsApp
         private Label[,] labelsMap;
         private static Random random = new Random();
         private int score = 0;
+        private string username = "";
         int number;
-        User user;
-        IUserResultsStorage userResults;
 
         public MainForm()
         {
@@ -17,13 +18,12 @@ namespace _2048WinFormsApp
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            StartSettingsForm userNameForm = new StartSettingsForm();
-            userNameForm.ShowDialog();
+            StartForm startForm = new StartForm();
+            DatabaseHelper.InitializeDatabase();
+            startForm.ShowDialog();
+            username = startForm.userName;
+            mapSize = startForm.mapSize;
 
-            user = new User(userNameForm.userName);
-            mapSize = userNameForm.mapSize;
-
-            userResults = new UserResultsStorageJson();
             bestScoreLabel.Text = GetBestScore().ToString();
 
             InitMap();
@@ -33,8 +33,7 @@ namespace _2048WinFormsApp
 
         private int GetBestScore()
         {
-            var allStatistics = userResults.GetAll();
-            return allStatistics.Select(x => x.Score).Max(); ;
+            return DatabaseHelper.ReadBestScore();
         }
 
         private void ShowScore()
@@ -62,12 +61,11 @@ namespace _2048WinFormsApp
         {
             while (true)
             {
+
                 if (isFullMap())
                 {
-                    user.Score = score;
-                    userResults.SaveAll(user);
-
-                    if (MessageBox.Show("Игра окончена! Запустить игру повторно?", "Game Over!", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                    if (MessageBox.Show("The game is over! Restart the game?", "Game Over!", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                        DatabaseHelper.CreateRecord(username, score);
                         Application.Restart();
                     break;
                 }
@@ -79,6 +77,7 @@ namespace _2048WinFormsApp
                 {
                     labelsMap[indexRow, indexColumn].Text = (random.Next(100) < 75) ? "2" : "4";
                     ChangeLabelBackColor(labelsMap[indexRow, indexColumn]);
+                    DatabaseHelper.CreateRecord(username, score);
                     break;
                 }
             }
@@ -104,7 +103,7 @@ namespace _2048WinFormsApp
             label.Size = new Size(70, 70);
             label.TextAlign = ContentAlignment.MiddleCenter;
             int x = 10 + indexColumn * 76;
-            int y = 70 + indexRow * 76;
+            int y = 100 + indexRow * 76;
             label.Location = new Point(x, y);
             label.TextChanged += Label_TextChanged;
 
@@ -399,26 +398,23 @@ namespace _2048WinFormsApp
             ChangeLabelBackColor((Label)sender);
         }
 
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+
+        private void leaderboardToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            GameRulesForm gameRules = new GameRulesForm();
-            gameRules.ShowDialog();
+            Leaderboard gameStatistics = new Leaderboard();
+            gameStatistics.Show();
         }
 
-        private void перезапуститьИгруToolStripMenuItem_Click(object sender, EventArgs e)
+        private void restartToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            DatabaseHelper.CreateRecord(username, score);
             Application.Restart();
         }
 
-        private void выходToolStripMenuItem_Click(object sender, EventArgs e)
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            DatabaseHelper.CreateRecord(username, score);
             Application.Exit();
-        }
-
-        private void статистикаИгрыToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            GameStatisticForm gameStatisticForm = new GameStatisticForm();
-            gameStatisticForm.Show();
         }
     }
 }

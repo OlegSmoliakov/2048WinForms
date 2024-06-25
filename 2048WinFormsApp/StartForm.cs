@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace _2048WinFormsApp
 {
-    public partial class StartSettingsForm : Form
+    public partial class StartForm : Form
     {
         public string userName;
         public int mapSize;
-        public StartSettingsForm()
+        public StartForm()
         {
             InitializeComponent();
         }

@@ -1,6 +1,6 @@
 ﻿namespace _2048WinFormsApp
 {
-    partial class GameStatistics
+    partial class Leaderboard
     {
         /// <summary>
         /// Required designer variable.
@@ -28,52 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.userGameStatisticDataGridView = new System.Windows.Forms.DataGridView();
-            this.userName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userGameStatistic = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.userGameStatisticDataGridView)).BeginInit();
-            this.SuspendLayout();
+            dataGridView = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
+            SuspendLayout();
             // 
-            // userGameStatisticDataGridView
+            // dataGridView
             // 
-            this.userGameStatisticDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.userGameStatisticDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.userName,
-            this.userGameStatistic});
-            this.userGameStatisticDataGridView.Location = new System.Drawing.Point(12, 12);
-            this.userGameStatisticDataGridView.Name = "userGameStatisticDataGridView";
-            this.userGameStatisticDataGridView.RowTemplate.Height = 25;
-            this.userGameStatisticDataGridView.Size = new System.Drawing.Size(246, 426);
-            this.userGameStatisticDataGridView.TabIndex = 0;
+            dataGridView.AllowUserToAddRows = false;
+            dataGridView.AllowUserToDeleteRows = false;
+            dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView.Location = new Point(12, 12);
+            dataGridView.Name = "dataGridView";
+            dataGridView.ReadOnly = true;
+            dataGridView.RowHeadersWidth = 51;
+            dataGridView.RowTemplate.Height = 29;
+            dataGridView.Size = new Size(285, 576);
+            dataGridView.TabIndex = 0;
             // 
-            // userName
+            // Leaderboard
             // 
-            this.userName.HeaderText = "Имя";
-            this.userName.Name = "userName";
-            // 
-            // userGameStatistic
-            // 
-            this.userGameStatistic.HeaderText = "Результат";
-            this.userGameStatistic.Name = "userGameStatistic";
-            // 
-            // GameStatistics
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(270, 450);
-            this.Controls.Add(this.userGameStatisticDataGridView);
-            this.Name = "GameStatistics";
-            this.Text = "GameStatistics";
-            this.Load += new System.EventHandler(this.GameStatistics_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.userGameStatisticDataGridView)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(309, 600);
+            Controls.Add(dataGridView);
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "Leaderboard";
+            Text = "LeaderBoard";
+            ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
 
-        private DataGridView userGameStatisticDataGridView;
-        private DataGridViewTextBoxColumn userName;
-        private DataGridViewTextBoxColumn userGameStatistic;
+        private DataGridView dataGridView;
     }
 }
